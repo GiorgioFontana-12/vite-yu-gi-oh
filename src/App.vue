@@ -18,6 +18,8 @@ export default {
       //Se completata correttamente stampo il dato
       console.log("Ricevuto: ", r);
       //Copio i dati nello store per riutilizzarli in altri componenti
+      this.storeFigurine.figurine = r.data.data
+      console.log(this.storeFigurine.figurine)
     })
   }
 }
