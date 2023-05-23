@@ -1,5 +1,6 @@
 <script>
 import { storeFigurine } from '../src/components/store';
+import axios from 'axios';
 
 export default {
   name: "App",
@@ -17,7 +18,6 @@ export default {
       //Se completata correttamente stampo il dato
       console.log("Ricevuto: ", r);
       //Copio i dati nello store per riutilizzarli in altri componenti
-      this.store.personaggi = r;
     })
   }
 }
