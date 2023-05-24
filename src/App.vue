@@ -33,8 +33,12 @@ export default {
     
   </header>
   <main>
-    <div v-for="(img, i) in storeFigurine.figurine"> 
-      <img :src=" img.card_images[0].image_url " alt="">
+    <div class="cardBox" > 
+      <div v-for="(img, i) in storeFigurine.figurine" class="card">
+        <img :src=" img.card_images[0].image_url " alt="">
+        <h2> {{ img.name }} </h2>
+        <p> {{ img.archetype }} </p>
+      </div>
     </div>
   </main>
 
@@ -52,5 +56,31 @@ export default {
   main{
     background-color: orange;
     padding: 80px ;
+    .cardBox{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;      
+      background-color: white;
+      padding: 25px;
+      width: 100%;
+
+      .card{
+        text-align: center;
+        background-color: orange;
+        margin: 25px;
+        display: flex;
+        flex-direction: column;
+        h2{
+          color: white;
+          margin: 1em;
+        };
+        p{
+          margin: 1em
+        };
+      }
+      
+
+    }
   }
 </style>
