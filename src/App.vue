@@ -8,7 +8,18 @@ export default {
   },
   data() {
     return {
-      storeFigurine
+      storeFigurine ,
+      selectArchetypes: [
+      "Tutti",
+        'Dark Magician',
+        'Cyberdark',
+        'Blue-Eyes',
+        'Alien',
+        'Red-Eyes',
+        'Silent Magician'
+      ],
+      selectedArchetypes: "Tutti"
+
     }
   },
   mounted() {
@@ -23,6 +34,24 @@ export default {
       console.log(this.storeFigurine.figurine[0].card_images[0].image_url)
 
     })
+  },
+  methods: {
+    searchArchetype(){
+      console.log(this.selectedArchetypes)
+
+      
+    axios.get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?archetype=${this.selectedArchetypes}`).then(r => {
+      //Se completata correttamente stampo il dato
+      console.log("Ricevuto: ", r);
+      //Copio i dati nello store per riutilizzarli in altri componenti
+      this.storeFigurine.figurine = r.data.data
+      console.log(this.storeFigurine.figurine)
+      console.log(this.storeFigurine.figurine[0].card_images[0].image_url)
+
+    })
+
+    }
+  
   }
 }
 </script>
@@ -33,6 +62,9 @@ export default {
     
   </header>
   <main>
+    <select @change="searchArchetype" v-model="selectedArchetypes">
+      <option v-for="opzione in selectArchetypes">{{ opzione }}</option>
+    </select>
     <div class="cardBox" > 
       <div v-for="(img, i) in storeFigurine.figurine" class="card">
         <img :src=" img.card_images[0].image_url " alt="">
